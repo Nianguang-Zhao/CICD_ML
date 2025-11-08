@@ -59,4 +59,8 @@ plt.savefig("Results/model_results.png", dpi=120)
 import skops.io as sio
 
 sio.dump(pipe, "Model/drug_pipeline.skops")
-sio.load("Model/drug_pipeline.skops", trusted=True)
+
+loaded_pipe = sio.load(
+    "Model/drug_pipeline.skops", 
+    trusted=sio.get_untrusted_types(file="Model/drug_pipeline.skops")
+)
