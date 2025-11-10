@@ -59,4 +59,7 @@ plt.savefig("Results/model_results.png", dpi=120)
 import skops.io as sio
 
 sio.dump(pipe, "Model/drug_pipeline.skops")
-sio.load("Model/drug_pipeline.skops", trusted=True)
+# Option 1: Get untrusted types first (safer)
+untrusted_types = sio.get_untrusted_types(file="Model/drug_pipeline.skops")
+print("Untrusted types:", untrusted_types)  # Review these
+loaded_model = sio.load("Model/drug_pipeline.skops", trusted=untrusted_types)
